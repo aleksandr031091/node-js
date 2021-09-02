@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/aleksandr031091/node-js#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.12"
+    "commander": "^8.1.0",
+    "nodemon": "^2.0.12",
+    "yargs": "^17.1.1"
   }
 }
