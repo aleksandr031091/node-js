@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
-
 const path = require("path");
+const { nanoid } = require("nanoid");
 
 //   Раскомментируй и запиши значение
 const contactsPath = path.join(__dirname, "./db/contacts.json");
@@ -9,8 +9,8 @@ const contactsPath = path.join(__dirname, "./db/contacts.json");
 async function listContacts() {
   // ...твой код
   return await fs
-    .readFile(contactsPath)
-    .then((data) => data.toString())
+    .readFile(contactsPath, "utf-8")
+    .then((data) => JSON.parse(data))
     .catch((err) => console.log(err.message));
 }
 
@@ -40,12 +40,13 @@ async function removeContact(contactId) {
 
 async function addContact(name, email, phone) {
   // ...твой код
+  const id = nanoid();
   try {
     const contacts = await listContacts();
 
     const result = contacts.map((contact) => [
       ...contact,
-      { name, email, phone },
+      { id, name, email, phone },
     ]);
 
     await fs.writeFile(contactsPath, JSON.stringify(result));
